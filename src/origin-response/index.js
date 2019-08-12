@@ -26,6 +26,8 @@ exports.handler = (event, context, callback) => {
 		return;
 	}
 
+	const bucket = request.origin.s3.domainName.replace('.s3.amazonaws.com', '');
+
 	// Perform the image manipulations
 	const dimensions = match[1].match(/(\d+h)?(\d+w)?(default)?/i);
 	const height = (dimensions[1] && !dimensions[3]) ? parseInt(dimensions[1]) : null;
@@ -37,7 +39,7 @@ exports.handler = (event, context, callback) => {
 	let buffer = null;
 	const s3 = new aws.S3();
 	s3.getObject({
-		Bucket: process.env.INPUT_BUCKET,
+		Bucket: bucket,
 		Key: image
 
 	}).promise().then(data => {
@@ -60,7 +62,7 @@ exports.handler = (event, context, callback) => {
 		// Save the new image
 		return s3.putObject({
 			Body: buffer,
-			Bucket: process.env.INPUT_BUCKET,
+			Bucket: bucket,
 			ContentType: mime.getType(image),
 			CacheControl: 'max-age=31536000',
 			Key: request.uri.substring(1),
