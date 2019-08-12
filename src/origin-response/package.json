@@ -1,0 +1,10 @@
+{
+  "name": "origin-response",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Firespring",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "sharp": "^0.21.3"
+  }
+}

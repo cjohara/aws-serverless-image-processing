@@ -1,0 +1,26 @@
+{
+  "name": "lambda-edge-image-processing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "bin:build-deployment-packages": "node bin/build-deployment-packages",
+    "bin:docker-aws-packages": "node bin/docker-aws-packages",
+    "build": "rimraf dist && npm run webpack:build && npm run bin:docker-aws-packages && npm run bin:build-deployment-packages",
+    "docker:build": "docker build --tag amazonlinux:nodejs .",
+    "webpack:build": "webpack --config webpack.config.js --hide-modules"
+  },
+  "author": "Firespring",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "archiver": "^3.0.0",
+    "aws-sdk": "^2.395.0",
+    "copy-webpack-plugin": "^4.6.0",
+    "mime": "^2.4.0",
+    "querystring": "^0.2.0",
+    "rimraf": "^2.6.3",
+    "sharp": "^0.21.3",
+    "webpack": "^4.29.1",
+    "webpack-cli": "^3.2.1"
+  }
+}
