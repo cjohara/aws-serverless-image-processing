@@ -52,7 +52,7 @@ exports.handler = (event, context, callback) => {
 			newImage = newImage.resize({
 				height: height,
 				width: width,
-				fit: 'inside'
+				fit: 'cover'
 			});
 		}
 		return newImage.toBuffer();
